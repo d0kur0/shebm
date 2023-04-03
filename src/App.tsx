@@ -1,17 +1,24 @@
 import { Route, Router, Routes } from "@solidjs/router";
+import { onMount } from "solid-js";
+
+import { RandomShit } from "./pages/RandomShit";
+import { Settings } from "./pages/Settings";
+import { Thread } from "./pages/Thread";
+import { Threads } from "./pages/Threads";
 
 import { AppBar } from "./components/AppBar";
 import { Body, Layout, Navigation } from "./components/Layout";
 
 import { useHeightUnit } from "./hooks/useHeightUnit";
 
-import { RandomShit } from "./stores/RandomShit";
-import { Settings } from "./stores/Settings";
-import { Thread } from "./stores/Thread";
-import { Threads } from "./stores/Threads";
+import { assetsStore } from "./stores/assets";
 
 const App = () => {
 	useHeightUnit();
+
+	onMount(() => {
+		assetsStore.fetchList();
+	});
 
 	return (
 		<Router>
